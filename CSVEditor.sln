@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32421.90
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSVEditor", "CSVEditor.csproj", "{BE943DA6-EC35-46ED-B9F6-941CD7E1549D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BE943DA6-EC35-46ED-B9F6-941CD7E1549D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE943DA6-EC35-46ED-B9F6-941CD7E1549D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE943DA6-EC35-46ED-B9F6-941CD7E1549D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE943DA6-EC35-46ED-B9F6-941CD7E1549D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {44D2FF2B-97E8-4298-8DEA-C154EACDA063}
+	EndGlobalSection
+EndGlobal
