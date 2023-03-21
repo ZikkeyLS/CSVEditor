@@ -1,19 +1,17 @@
-﻿using System;
+﻿using CSVEditor.Dialogues;
+using System;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace CSVEditor
 {
     public partial class MainWindow : Window
     {
+        private DialogueAssembler _dialogueAssembler = new DialogueAssembler();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -59,7 +57,6 @@ namespace CSVEditor
                 DragMove();
         }
 
-
         private void BorderLeftClick(object sender, MouseButtonEventArgs e)
         {
             if (e.ClickCount != 2)
@@ -77,14 +74,5 @@ namespace CSVEditor
             }
 
         }
-    }
-
-    public class Dialogue
-    {
-        public string Question { get; set; }
-        public string Answer01 { get; set; }
-        public string Answer02 { get; set; }
-        public string Answer03 { get; set; }
-        public string Answer04 { get; set; }
     }
 }
