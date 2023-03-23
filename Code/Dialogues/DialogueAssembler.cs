@@ -21,23 +21,9 @@ namespace CSVEditor.Dialogues
             return new FileInfo(filePath);
         }
 
-        public string[] GetParsedDialogue(List<string> fileData, int index)
+        public string[] GetParsedDialogue(string data)
         {
-            if (index >= fileData.Count)
-                return new string[] {};
-
-            string initial = fileData[index];
-            return initial.Split(',');
-        }
-
-        public void AddDialogue(List<string> fileData, string question, string answer01, string answer02, string answer03, string answer04)
-        {
-            fileData.Add($"{question},{answer01},{answer02},{answer03},{answer04}");
-        }
-
-        public void RemoveDialogue(List<string> fileData, int index)
-        {
-            fileData.RemoveAt(index);
+            return data.Split(',');
         }
 
         public string GetCompiledDialogue(string[] parts)
@@ -53,11 +39,14 @@ namespace CSVEditor.Dialogues
             return final;
         }
 
-        public FileInfo GetFile(string path) => new FileInfo(path);
-
-        public void RemoveTemplate(string name)
+        public void AddDialogue(List<string> fileData, string question, string answer01, string answer02, string answer03, string answer04)
         {
-            File.Delete($"{FolderName}/{name}.csv");
+            fileData.Add($"{question},{answer01},{answer02},{answer03},{answer04}");
+        }
+
+        public void RemoveDialogue(List<string> fileData, int index)
+        {
+            fileData.RemoveAt(index);
         }
 
         private void TryMakeDirectory()

@@ -11,24 +11,12 @@ namespace CSVEditor
 {
     public partial class MainWindow : Window
     {
-        private DialogueAssembler _dialogueAssembler = new DialogueAssembler();
-        private FileOrder _fileOrder = new FileOrder();
+        private FileWorker _fileWorker = new FileWorker();
 
         public MainWindow()
         {
             InitializeComponent();
-            _fileOrder.Initialize(new Button[3] { File01, File02, File03 });
-
-            // var brushConverter = new BrushConverter();
-
-            /*
-                ObservableCollection<Dialogue> dialogues = new ObservableCollection<Dialogue>();
-
-                for (int i = 0; i < 20; i++)
-                    dialogues.Add(new Dialogue { Question = i.ToString(), Answer01 = "0" + (i * 1).ToString(), Answer02 = "0" + (i * 2).ToString(), Answer03 = "0" + (i * 3).ToString(), Answer04 = "0" + (i * 4).ToString() });
-
-                DialoguesGrid.ItemsSource = dialogues;
-             */
+            _fileWorker.Initialize(new Button[3] { File01, File02, File03 }, DialoguesGrid);
         }
 
         private void OnTextBoxKeyDown(object sender, KeyEventArgs e)
@@ -56,8 +44,7 @@ namespace CSVEditor
 
         private void CreateFileClick(object sender, MouseButtonEventArgs e)
         {
-            FileInfo file = _dialogueAssembler.CreateTemplate();
-            _fileOrder.ChangeFile(Path.GetFileNameWithoutExtension(file.Name), file.FullName, true);
+            _fileWorker.CreateTemplate();
         }
 
         private void SearchFileClick(object sender, MouseButtonEventArgs e)
@@ -70,12 +57,12 @@ namespace CSVEditor
             Nullable<bool> result = dialog.ShowDialog();
 
             if (result == true)
-                _fileOrder.ChangeFile(Path.GetFileNameWithoutExtension(dialog.SafeFileName), dialog.FileName, true);
+                _fileWorker.SetCurrentFile(Path.GetFileNameWithoutExtension(dialog.SafeFileName), dialog.FileName);
         }
 
         private void ClearFileClick(object sender, MouseButtonEventArgs e)
         {
-            _fileOrder.ClearFile();
+            _fileWorker.ClearFile();
         }
 
         private void BorderClick(object sender, MouseButtonEventArgs e)

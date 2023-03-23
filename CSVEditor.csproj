@@ -73,6 +73,7 @@
     <Compile Include="Code\Dialogues\Dialogue.cs" />
     <Compile Include="Code\Dialogues\DialogueAssembler.cs" />
     <Compile Include="Code\FileOrder.cs" />
+    <Compile Include="Code\FileWorker.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
