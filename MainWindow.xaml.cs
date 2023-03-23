@@ -1,6 +1,7 @@
 ﻿using CSVEditor.Dialogues;
 using System;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -11,21 +12,23 @@ namespace CSVEditor
     public partial class MainWindow : Window
     {
         private DialogueAssembler _dialogueAssembler = new DialogueAssembler();
+        private FileOrder _fileOrder = new FileOrder();
 
         public MainWindow()
         {
             InitializeComponent();
+            _fileOrder.Initialize(new Button[3] { File01, File02, File03 });
 
-            CloseApplicationButton.Click += CloseApplicationButtonClick;
-            MinimizeApplicationButton.Click += MinimizeApplicationButtonClick;
+            // var brushConverter = new BrushConverter();
 
-            var brushConverter = new BrushConverter();
-            ObservableCollection<Dialogue> dialogues = new ObservableCollection<Dialogue>();
+            /*
+                ObservableCollection<Dialogue> dialogues = new ObservableCollection<Dialogue>();
 
-            for (int i = 0; i < 20; i++)
-                dialogues.Add(new Dialogue { Question = i.ToString(), Answer01 = "0" + (i * 1).ToString(), Answer02 = "0" + (i * 2).ToString(), Answer03 = "0" + (i * 3).ToString(), Answer04 = "0" + (i * 4).ToString() });
+                for (int i = 0; i < 20; i++)
+                    dialogues.Add(new Dialogue { Question = i.ToString(), Answer01 = "0" + (i * 1).ToString(), Answer02 = "0" + (i * 2).ToString(), Answer03 = "0" + (i * 3).ToString(), Answer04 = "0" + (i * 4).ToString() });
 
-            DialoguesGrid.ItemsSource = dialogues;
+                DialoguesGrid.ItemsSource = dialogues;
+             */
         }
 
         private void OnTextBoxKeyDown(object sender, KeyEventArgs e)
@@ -41,14 +44,38 @@ namespace CSVEditor
             }
         }
 
-        private void MinimizeApplicationButtonClick(object sender, RoutedEventArgs e)
+        private void MinimizeApplicationButtonClick(object sender, MouseButtonEventArgs e)
         {
             WindowState = WindowState.Minimized;
         }
 
-        private void CloseApplicationButtonClick(object sender, RoutedEventArgs e)
+        private void CloseApplicationButtonClick(object sender, MouseButtonEventArgs e)
         {
             Application.Current.Shutdown();
+        }
+
+        private void CreateFileClick(object sender, MouseButtonEventArgs e)
+        {
+            FileInfo file = _dialogueAssembler.CreateTemplate();
+            _fileOrder.ChangeFile(Path.GetFileNameWithoutExtension(file.Name), file.FullName, true);
+        }
+
+        private void SearchFileClick(object sender, MouseButtonEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog();
+            dialog.DefaultExt = ".csv";
+            dialog.Filter = "CSV Files (*.csv)|*.csv";
+            dialog.Multiselect = false;
+
+            Nullable<bool> result = dialog.ShowDialog();
+
+            if (result == true)
+                _fileOrder.ChangeFile(Path.GetFileNameWithoutExtension(dialog.SafeFileName), dialog.FileName, true);
+        }
+
+        private void ClearFileClick(object sender, MouseButtonEventArgs e)
+        {
+            _fileOrder.ClearFile();
         }
 
         private void BorderClick(object sender, MouseButtonEventArgs e)

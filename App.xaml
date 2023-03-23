@@ -98,7 +98,7 @@
             <Setter Property="Width" Value="150" />
             <Setter Property="Height" Value="35" />
             <Setter Property="HorizontalAlignment" Value="Right" />
-            <Setter Property="Margin" Value="0 20 0 0" />
+            <Setter Property="Margin" Value="10 0 0 0" />
             <Setter Property="FontSize" Value="13" />
             <Setter Property="Grid.Row" Value="1" />
             <Setter Property="Template">
@@ -122,8 +122,9 @@
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="Foreground" Value="#121518" />
             <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-            <Setter Property="Width" Value="70" />
-            <Setter Property="Height" Value="45" />
+            <Setter Property="Width" Value="auto" />
+            <Setter Property="Height" Value="auto" />
+            <Setter Property="Margin" Value="10 0 0 0" />
             <Setter Property="BorderBrush" Value="Transparent" />
             <Setter Property="FontSize" Value="16" />
             <Setter Property="FontWeight" Value="SemiBold" />

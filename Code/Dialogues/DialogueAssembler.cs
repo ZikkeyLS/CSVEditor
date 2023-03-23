@@ -13,7 +13,7 @@ namespace CSVEditor.Dialogues
             TryMakeDirectory();
 
             int id = Directory.GetFiles(FolderName).Length + 1; // order by 1-st, 2-nd, etc...
-            string filePath = $"{FolderName}/Dialogue.{id}";
+            string filePath = $"{FolderName}/Dialogue({id}).csv";
 
             File.Create(filePath).Close();
             File.WriteAllText(filePath, FileFormat);
@@ -57,7 +57,7 @@ namespace CSVEditor.Dialogues
 
         public void RemoveTemplate(string name)
         {
-            File.Delete($"{FolderName}/{name}");
+            File.Delete($"{FolderName}/{name}.csv");
         }
 
         private void TryMakeDirectory()
