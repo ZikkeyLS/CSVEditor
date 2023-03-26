@@ -94,5 +94,25 @@ namespace CSVEditor
             if(_fileWorker.Linked)
                 _fileWorker.AddRow();
         }
+
+        private void DeleteSelectedRowsClick(object sender, RoutedEventArgs e)
+        {
+            if (_fileWorker.Linked)
+                _fileWorker.DeleteSelectedRows();
+        }
+
+        private void CheckBoxChecked(object sender, RoutedEventArgs e)
+        {
+            _fileWorker.AllSelected = true;
+            for (int i = 0; i < Dialogues.Count; i++)
+                Dialogues[i].Selected = true;
+        }
+
+        private void CheckBoxUnchecked(object sender, RoutedEventArgs e)
+        {
+            _fileWorker.AllSelected = false;
+            for (int i = 0; i < Dialogues.Count; i++)
+                Dialogues[i].Selected = false;
+        }
     }
 }

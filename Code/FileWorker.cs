@@ -1,8 +1,10 @@
 ﻿using CSVEditor.Dialogues;
 using CSVEditor.Utility;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using System.Windows.Controls;
 
 namespace CSVEditor
@@ -10,6 +12,8 @@ namespace CSVEditor
     internal class FileWorker
     {
         public bool Linked { get; private set; } = false;
+        public bool AllSelected { get; set; } = false;
+
         private FileOrder _order = new FileOrder();
         private DialogueAssembler _dialogueAssembler = new DialogueAssembler();
 
@@ -35,13 +39,29 @@ namespace CSVEditor
 
         public void AddRow()
         {
-            _dialogues.Add(new Dialogue() { Question = "...", Answer01 = "...", Answer02 = "...", Answer03 = "...", Answer04 ="..." });
-            QuickFile.AddLine(_currentPath, "\n...,...,...,...,...");
+            _dialogues.Add(new Dialogue() { Selected = AllSelected, 
+                Question = "...", Answer01 = "...", Answer02 = "...", Answer03 = "...", Answer04 ="..." });
+
+            QuickFile.AddLine(_currentPath, "...,...,...,...,...");
+
+            _dialogueCount.Text = $"{_dialogues.Count} dialogues";
         }
 
         public void DeleteSelectedRows()
         {
-            
+            for (int i = _dialogues.Count - 1; i >= 0; i--)
+                if (_dialogues[i].Selected)
+                {
+                    List<string> data = File.ReadAllLines(_currentPath).ToList();
+                    data.RemoveAt(i + 1 + ((_pageID - 1) * limitCellsPerPage));
+                    File.WriteAllLines(_currentPath, data);
+                }
+
+            for(int i = _dialogues.Count - 1; i >= 0; i--)
+                if (_dialogues[i].Selected)
+                    _dialogues.RemoveAt(i);
+
+            _dialogueCount.Text = $"{_dialogues.Count} dialogues";
         }
 
         private void DialoguesGridCurrentCellChanged(object sender, EventArgs e)
@@ -49,15 +69,13 @@ namespace CSVEditor
             DataGrid dataGrid = sender as DataGrid;
 
             if (dataGrid.SelectedCells.Count > 0)
-            {
                 for (int i = 0; i < _dialogues.Count; i++)
                     if (_dialogues[i] == _grid.SelectedItem)
                     {
                         string value = _dialogueAssembler.GetCompiledDialogue(_dialogues[i]);
-                        int lineIndex = i + 2 + ((_pageID - 1) * limitCellsPerPage);
+                        int lineIndex = i + 1 + ((_pageID - 1) * limitCellsPerPage);
                         QuickFile.RewriteLine(_currentPath, lineIndex, value);
                     }
-            }
         }
 
         private void CellEdit(object sender, DataGridCellEditEndingEventArgs e)

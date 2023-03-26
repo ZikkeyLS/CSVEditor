@@ -152,7 +152,7 @@
                         <TextBlock Text="Add new dialogue" />
                     </StackPanel>
                 </Button>
-                <Button Grid.Row="2"  Margin="0 10 10 0" Style="{StaticResource addDialogueButton}">
+                <Button Click="DeleteSelectedRowsClick" Grid.Row="2" Margin="0 10 10 0" Style="{StaticResource addDialogueButton}">
                     <StackPanel Orientation="Horizontal">
                         <Icon:PackIconMaterial Kind="Minus" VerticalAlignment="Center" Width="11" Height="11" Margin="0 1 8 0" />
                         <TextBlock Text="Remove selected" />
@@ -162,9 +162,9 @@
                 <!--Dialogues Datagrid-->
                 <DataGrid Name="DialoguesGrid" Margin="0 10 0 0" Style="{DynamicResource DataGridStyle}" CellStyle="{DynamicResource DataGridCellStyle}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle}" RowStyle="{DynamicResource DataGridRowStyle}" Grid.Row="5">
                     <DataGrid.Columns>
-                        <DataGridCheckBoxColumn CanUserResize="False" Width="auto" ElementStyle="{StaticResource CheckBoxStyle}">
+                        <DataGridCheckBoxColumn CanUserResize="False" Width="auto" ElementStyle="{StaticResource CheckBoxStyle}" >
                             <DataGridCheckBoxColumn.Header>
-                                <CheckBox Style="{StaticResource CheckBoxStyle}" />
+                                <CheckBox Checked="CheckBoxChecked" Unchecked="CheckBoxUnchecked"  Style="{StaticResource CheckBoxStyle}" />
                             </DataGridCheckBoxColumn.Header>
                         </DataGridCheckBoxColumn>
 

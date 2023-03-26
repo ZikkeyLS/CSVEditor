@@ -6,7 +6,7 @@ namespace CSVEditor.Dialogues
     internal class DialogueAssembler
     {
         private const string FolderName = "Dialogues";
-        private const string FileFormat = "Question,Answer01,Answer02,Answer03,Answer04";
+        private const string FileFormat = "Question,Answer01,Answer02,Answer03,Answer04\n";
 
         public FileInfo CreateTemplate()
         {
