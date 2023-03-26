@@ -26,17 +26,9 @@ namespace CSVEditor.Dialogues
             return data.Split(',');
         }
 
-        public string GetCompiledDialogue(string[] parts)
+        public string GetCompiledDialogue(Dialogue dialogue)
         {
-            string final = "";
-
-            for (int i = 0; i < parts.Length; i++)
-            {
-                string separator = i != parts.Length - 1 ? "," : "";
-                final += parts[i] + separator;
-            }
-
-            return final;
+            return $"{dialogue.Question},{dialogue.Answer01},{dialogue.Answer02},{dialogue.Answer03},{dialogue.Answer04}";
         }
 
         public void AddDialogue(List<string> fileData, string question, string answer01, string answer02, string answer03, string answer04)

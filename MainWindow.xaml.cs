@@ -5,18 +5,18 @@ using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 
 namespace CSVEditor
 {
     public partial class MainWindow : Window
     {
+        public ObservableCollection<Dialogue> Dialogues { get; set; } = new ObservableCollection<Dialogue>();
         private FileWorker _fileWorker = new FileWorker();
 
         public MainWindow()
         {
             InitializeComponent();
-            _fileWorker.Initialize(new Button[3] { File01, File02, File03 }, DialoguesGrid);
+            _fileWorker.Initialize(new Button[3] { File01, File02, File03 }, DialoguesGrid, Dialogues);
         }
 
         private void OnTextBoxKeyDown(object sender, KeyEventArgs e)
