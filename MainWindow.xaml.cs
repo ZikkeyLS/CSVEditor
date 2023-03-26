@@ -16,7 +16,7 @@ namespace CSVEditor
         public MainWindow()
         {
             InitializeComponent();
-            _fileWorker.Initialize(new Button[3] { File01, File02, File03 }, DialoguesGrid, Dialogues);
+            _fileWorker.Initialize(new Button[3] { File01, File02, File03 }, DialoguesGrid, Dialogues, DialogueCount);
         }
 
         private void OnTextBoxKeyDown(object sender, KeyEventArgs e)
@@ -87,6 +87,12 @@ namespace CSVEditor
                 WindowState = WindowState.Maximized;
             }
 
+        }
+
+        private void AddRowClick(object sender, RoutedEventArgs e)
+        {
+            if(_fileWorker.Linked)
+                _fileWorker.AddRow();
         }
     }
 }

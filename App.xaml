@@ -224,7 +224,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        
+
         <Style x:Key="{ComponentResourceKey ResourceId=DataGridSelectAllButtonStyle, TypeInTargetAssembly={x:Type DataGrid}}" TargetType="{x:Type Button}">
             <Setter Property="Template">
                 <Setter.Value>
@@ -333,7 +333,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        
+
         <Style x:Key="DataGridColumnHeaderStyle" TargetType="{x:Type DataGridColumnHeader}">
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="Background" Value="Transparent" />
@@ -353,7 +353,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        
+
         <Style x:Key="DataGridRowStyle" TargetType="{x:Type DataGridRow}">
             <Setter Property="Background" Value="White"/>
             <Setter Property="Margin" Value="0 4 0 0" />
@@ -394,7 +394,7 @@
                 </Trigger>
 
                 <Trigger Property="IsSelected" Value="True">
-                    <Setter Property="Background" Value="#FFC8C7C7" />
+                    <Setter Property="Background" Value="#FFA986EA" />
                     <Setter Property="Foreground" Value="#ffffff" />
                 </Trigger>
             </Style.Triggers>

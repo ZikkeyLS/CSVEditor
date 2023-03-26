@@ -9,23 +9,39 @@ namespace CSVEditor
 {
     internal class FileWorker
     {
+        public bool Linked { get; private set; } = false;
         private FileOrder _order = new FileOrder();
         private DialogueAssembler _dialogueAssembler = new DialogueAssembler();
-        private DataGrid _grid;
+
         private ObservableCollection<Dialogue> _dialogues;
+
+        private DataGrid _grid;
+        private TextBlock _dialogueCount;
 
         private string _currentPath = "";
         private int _pageID = 1;
 
         private const int limitCellsPerPage = 10;
 
-        public void Initialize(Button[] buttons, DataGrid grid, ObservableCollection<Dialogue> data)
+        public void Initialize(Button[] buttons, DataGrid grid, ObservableCollection<Dialogue> data, TextBlock dialogueCount)
         {
             _order.Initialize(buttons);
             _dialogues = data;
+            _dialogueCount = dialogueCount;
 
             _grid = grid;
             _grid.CurrentCellChanged += DialoguesGridCurrentCellChanged;
+        }
+
+        public void AddRow()
+        {
+            _dialogues.Add(new Dialogue() { Question = "...", Answer01 = "...", Answer02 = "...", Answer03 = "...", Answer04 ="..." });
+            QuickFile.AddLine(_currentPath, "\n...,...,...,...,...");
+        }
+
+        public void DeleteSelectedRows()
+        {
+            
         }
 
         private void DialoguesGridCurrentCellChanged(object sender, EventArgs e)
@@ -64,7 +80,7 @@ namespace CSVEditor
             _dialogues.Clear();
 
             string[] currentData = File.ReadAllLines(path);
-
+            
             for (int i = 1 + ((_pageID - 1) * limitCellsPerPage); i <= _pageID * limitCellsPerPage; i++)
             {
                 if (i + 1 > currentData.Length)
@@ -76,7 +92,10 @@ namespace CSVEditor
                    _dialogues.Add(new Dialogue() { Question = parts[0], Answer01 = parts[1], Answer02 = parts[2], Answer03 = parts[3], Answer04 = parts[4] });
             }
 
+            _dialogueCount.Text = $"{_dialogues.Count} dialogues";
             _grid.ItemsSource = _dialogues;
+
+            Linked = true;
         }
 
         public void ClearFile()
