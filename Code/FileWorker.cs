@@ -39,6 +39,9 @@ namespace CSVEditor
 
         public void AddRow()
         {
+            if (_dialogues.Count >= limitCellsPerPage)
+                return;
+
             _dialogues.Add(new Dialogue() { Selected = AllSelected,
                 Question = "...", Answer01 = "...", Answer02 = "...", Answer03 = "...", Answer04 = "..." });
 
