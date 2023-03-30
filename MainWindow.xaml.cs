@@ -17,6 +17,9 @@ namespace CSVEditor
         {
             InitializeComponent();
             _fileWorker.Initialize(new Button[3] { File01, File02, File03 }, DialoguesGrid, Dialogues, DialogueCount);
+            File01.PreviewMouseLeftButtonDown += (e, o) => { _fileWorker.SetCurrentFile(0); };
+            File02.PreviewMouseLeftButtonDown += (e, o) => { _fileWorker.SetCurrentFile(1); };
+            File03.PreviewMouseLeftButtonDown += (e, o) => { _fileWorker.SetCurrentFile(2); };
         }
 
         private void OnTextBoxKeyDown(object sender, KeyEventArgs e)

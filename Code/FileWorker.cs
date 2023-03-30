@@ -39,8 +39,8 @@ namespace CSVEditor
 
         public void AddRow()
         {
-            _dialogues.Add(new Dialogue() { Selected = AllSelected, 
-                Question = "...", Answer01 = "...", Answer02 = "...", Answer03 = "...", Answer04 ="..." });
+            _dialogues.Add(new Dialogue() { Selected = AllSelected,
+                Question = "...", Answer01 = "...", Answer02 = "...", Answer03 = "...", Answer04 = "..." });
 
             QuickFile.AddLine(_currentPath, "...,...,...,...,...");
 
@@ -57,7 +57,7 @@ namespace CSVEditor
                     File.WriteAllLines(_currentPath, data);
                 }
 
-            for(int i = _dialogues.Count - 1; i >= 0; i--)
+            for (int i = _dialogues.Count - 1; i >= 0; i--)
                 if (_dialogues[i].Selected)
                     _dialogues.RemoveAt(i);
 
@@ -90,15 +90,28 @@ namespace CSVEditor
             SetCurrentFile(Path.GetFileNameWithoutExtension(file.Name), file.FullName);
         }
 
+        public void SetCurrentFile(int index)
+        {
+            DialogueFile dialogue = _order.SetIndexedFile(index);
+
+            if (dialogue != null)
+                UpdateFile(dialogue.Path);
+        }
+
         public void SetCurrentFile(string name, string path)
         {
             _order.ChangeFile(Path.GetFileNameWithoutExtension(name), path);
+            UpdateFile(path);
+        }
+
+        private void UpdateFile(string path)
+        {
             _currentPath = path;
 
             _dialogues.Clear();
 
             string[] currentData = File.ReadAllLines(path);
-            
+
             for (int i = 1 + ((_pageID - 1) * limitCellsPerPage); i <= _pageID * limitCellsPerPage; i++)
             {
                 if (i + 1 > currentData.Length)
@@ -107,7 +120,7 @@ namespace CSVEditor
                 string[] parts = _dialogueAssembler.GetParsedDialogue(currentData[i]);
 
                 if (parts.Length == 5)
-                   _dialogues.Add(new Dialogue() { Question = parts[0], Answer01 = parts[1], Answer02 = parts[2], Answer03 = parts[3], Answer04 = parts[4] });
+                    _dialogues.Add(new Dialogue() { Selected = AllSelected, Question = parts[0], Answer01 = parts[1], Answer02 = parts[2], Answer03 = parts[3], Answer04 = parts[4] });
             }
 
             _dialogueCount.Text = $"{_dialogues.Count} dialogues";

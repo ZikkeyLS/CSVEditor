@@ -2,7 +2,7 @@
 
 namespace CSVEditor
 {
-    internal class DialogueFile
+    public class DialogueFile
     {
         public string Name;
         public string Path;
@@ -21,11 +21,26 @@ namespace CSVEditor
 
         public void ChangeFile(string name, string path)
         {
-            _currentIndex = _currentIndex == _dialogueFiles.Length - 1 ? 0 : _currentIndex + 1;
+            bool allInitialized = true;
+
+            for (int i = 0; i < _dialogueFiles.Length; i++)
+                if (_dialogueFiles[i].Name == "")
+                    allInitialized = false;
+
+            _currentIndex = _currentIndex == _dialogueFiles.Length - 1 || allInitialized ? 0 : _currentIndex + 1;
             _dialogueFiles[_currentIndex].Name = name;
             _dialogueFiles[_currentIndex].Path = path;
 
             _buttons[_currentIndex].Content = name;
+        }
+
+        public DialogueFile SetIndexedFile(int index)
+        {
+            if (_dialogueFiles[index].Name == "")
+                return null;
+
+            _currentIndex = index;
+            return _dialogueFiles[index];
         }
         
         public void ClearFile()
