@@ -30,16 +30,6 @@
 
                 <Border Grid.Row="1" Background="#623ed0" CornerRadius="0 50 0 30">
                     <DockPanel>
-                        <!--Menu Logo-->
-                        <Border Width="80" Height="80" Padding="3" Background="Transparent" CornerRadius="100" 
-                                DockPanel.Dock="Top" HorizontalAlignment="Left" Margin="55 -30 0 0">
-                            <Ellipse>
-                                <Ellipse.Fill>
-                                    <ImageBrush ImageSource="/Images/01Games.png"/>
-                                </Ellipse.Fill>
-                            </Ellipse>
-                        </Border>
-
                         <!--Menu Titles-->
 
                         <TextBlock Text="CSV Editor" Foreground="White" FontSize="22" FontWeight="SemiBold" 

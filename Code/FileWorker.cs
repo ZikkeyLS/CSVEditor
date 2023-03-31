@@ -75,7 +75,16 @@ namespace CSVEditor
                 for (int i = 0; i < _dialogues.Count; i++)
                     if (_dialogues[i] == _grid.SelectedItem)
                     {
-                        string value = _dialogueAssembler.GetCompiledDialogue(_dialogues[i]);
+                        Dialogue temp = new Dialogue
+                        {
+                            Question = _dialogues[i].Question.Replace(",", "[comma]"),
+                            Answer01 = _dialogues[i].Answer01.Replace(",", "[comma]"),
+                            Answer02 = _dialogues[i].Answer02.Replace(",", "[comma]"),
+                            Answer03 = _dialogues[i].Answer03.Replace(",", "[comma]"),
+                            Answer04 = _dialogues[i].Answer04.Replace(",", "[comma]")
+                        };
+
+                        string value = _dialogueAssembler.GetCompiledDialogue(temp);
                         int lineIndex = i + 1 + ((_pageID - 1) * limitCellsPerPage);
                         QuickFile.RewriteLine(_currentPath, lineIndex, value);
                     }

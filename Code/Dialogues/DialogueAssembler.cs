@@ -24,22 +24,17 @@ namespace CSVEditor.Dialogues
 
         public string[] GetParsedDialogue(string data)
         {
-            return data.Replace("[next_line]", Environment.NewLine).Split(',');
+            string[] final = data.Replace("[next_line]", Environment.NewLine).Split(',');
+            
+            for (int i = 0; i < final.Length; i++)
+                final[i] = final[i].Replace("[comma]", ",");
+
+            return final;
         }
 
         public string GetCompiledDialogue(Dialogue dialogue)
         {
             return $"{dialogue.Question},{dialogue.Answer01},{dialogue.Answer02},{dialogue.Answer03},{dialogue.Answer04}";
-        }
-
-        public void AddDialogue(List<string> fileData, string question, string answer01, string answer02, string answer03, string answer04)
-        {
-            fileData.Add($"{question},{answer01},{answer02},{answer03},{answer04}");
-        }
-
-        public void RemoveDialogue(List<string> fileData, int index)
-        {
-            fileData.RemoveAt(index);
         }
 
         private void TryMakeDirectory()
