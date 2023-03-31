@@ -21,7 +21,7 @@ namespace CSVEditor
 
         public void ChangeFile(string name, string path)
         {
-            _currentIndex = (_currentIndex == _dialogueFiles.Length - 1)? 0 : _currentIndex + 1;
+            _currentIndex = _currentIndex == _dialogueFiles.Length - 1 ? 0 : _currentIndex + 1;
             _dialogueFiles[_currentIndex].Name = name;
             _dialogueFiles[_currentIndex].Path = path;
 

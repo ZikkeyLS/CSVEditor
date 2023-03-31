@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace CSVEditor.Dialogues
@@ -23,7 +24,7 @@ namespace CSVEditor.Dialogues
 
         public string[] GetParsedDialogue(string data)
         {
-            return data.Split(',');
+            return data.Replace("[next_line]", Environment.NewLine).Split(',');
         }
 
         public string GetCompiledDialogue(Dialogue dialogue)

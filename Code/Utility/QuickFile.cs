@@ -1,5 +1,5 @@
-﻿using System.IO;
-using System.Text;
+﻿using System;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace CSVEditor.Utility
@@ -11,7 +11,7 @@ namespace CSVEditor.Utility
             await Task.Run(() => 
             {
                 string[] data = File.ReadAllLines(path);
-                data[lineIndex] = value;
+                data[lineIndex] = value.Replace(Environment.NewLine, "[next_line]");
                 File.WriteAllLines(path, data);
             });
         }

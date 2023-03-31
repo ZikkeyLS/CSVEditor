@@ -76,19 +76,6 @@ namespace CSVEditor
 
         private void BorderLeftClick(object sender, MouseButtonEventArgs e)
         {
-            if (e.ClickCount != 2)
-                return;
-
-            if (WindowState == WindowState.Maximized)
-            {
-                WindowState = WindowState.Normal;
-                Width = 1080;
-                Height = 720;
-            }
-            else
-            {
-                WindowState = WindowState.Maximized;
-            }
 
         }
 
