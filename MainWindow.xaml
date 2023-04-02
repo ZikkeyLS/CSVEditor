@@ -12,7 +12,7 @@
     <Border Background="#eff2f7" CornerRadius="30" MouseDown="BorderClick" MouseLeftButtonDown="BorderLeftClick">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="150"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
@@ -45,7 +45,7 @@
                             <Button Style="{StaticResource menuButton}">
                                 <StackPanel Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="Home"  Style="{StaticResource menuButtonIcon}"/>
-                                    <TextBlock Text="Dialogue editor"/>
+                                    <TextBlock Text="Editor"/>
                                 </StackPanel>
                             </Button>
 
@@ -68,7 +68,7 @@
             </Grid>
             
             <!--Main Section-->
-            <Grid Grid.Column="1" Margin="30 20 20 20">
+            <Grid Grid.Column="1" Margin="10 10 10 10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
@@ -118,9 +118,6 @@
                     </Button>
                 </StackPanel>
 
-                <!--Separator-->
-                <Separator Height="1" Grid.Row="2" Background="#dae2ea" Margin="0 -1 0 40" />
-
                 <!--Page Title-->
                 <Grid Grid.Row="2" Width="300" Margin="0 10 0 0" HorizontalAlignment="Left">
                     <TextBlock Margin="20 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False" 
@@ -132,7 +129,7 @@
                                        Margin="0 0 15 0" Foreground="#b0b9c6" HorizontalAlignment="Right"/>
                 </Grid>
                 
-                <TextBlock Name="DialogueCount" Text="" Grid.Row="3" FontSize="22" FontWeight="SemiBold" Margin="15 5 0 0"
+                <TextBlock Name="DialogueCount" Text="" Grid.Row="3" FontSize="20" FontWeight="SemiBold" Margin="15 5 0 0"
                            HorizontalAlignment="Left" VerticalAlignment="Center" TextAlignment="Center" Foreground="#121518" />
 
                 <!--Add dialogue Button-->
@@ -157,6 +154,20 @@
                                 <CheckBox Checked="CheckBoxChecked" Unchecked="CheckBoxUnchecked"  Style="{StaticResource CheckBoxStyle}" />
                             </DataGridCheckBoxColumn.Header>
                         </DataGridCheckBoxColumn>
+
+                        <DataGridTextColumn Header="Index" Binding="{Binding Index}" Width="60">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="TextWrapping" Value="NoWrap" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                            <DataGridTextColumn.EditingElementStyle>
+                                <Style TargetType="TextBox">
+                                    <Setter Property="TextWrapping" Value="NoWrap" />
+                                    <Setter Property="IsEnabled" Value="False" />
+                                </Style>
+                            </DataGridTextColumn.EditingElementStyle>
+                        </DataGridTextColumn>
 
                         <DataGridTextColumn Header="Question" Binding="{Binding Question}" Width="*">
                             <DataGridTextColumn.ElementStyle>
@@ -225,34 +236,7 @@
                         </DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
-                
-                <!--Pagination Section-->
-                <Border Grid.Row="6" HorizontalAlignment="Right" BorderBrush="#dee5ec" BorderThickness="1"
-                        CornerRadius="5" Padding="5" Background="White" Margin="0 10 10 10">
-                    <StackPanel Orientation="Horizontal">
-                        <Button Style="{StaticResource pagingButton}">
-                            <Icon:PackIconMaterial Kind="ChevronLeft" Style="{StaticResource pagingButtonIcon}" />
-                        </Button>
-
-                        <Rectangle Width="1" Fill="#dee4ec" Margin="3 7" />
-
-                        <Button Style="{StaticResource pagingButton}" Content="1" />
-                        <Button Style="{StaticResource pagingButton}" Content="2" Background="#7950f2" Foreground="#ffffff" />
-                        <Button Style="{StaticResource pagingButton}" Content="3" />
-
-                        <TextBlock Text="..." Foreground="#6c7682" VerticalAlignment="Center" FontSize="15" Margin="10 0" />
-
-                        <Button Style="{StaticResource pagingButton}" Content="7" />
-                        <Button Style="{StaticResource pagingButton}" Content="8" />
-                        <Button Style="{StaticResource pagingButton}" Content="9" />
-
-                        <Rectangle Width="1" Fill="#dee4ec" Margin="3 7" />
-
-                        <Button Style="{StaticResource pagingButton}">
-                            <Icon:PackIconMaterial Kind="ChevronRight" Style="{StaticResource pagingButtonIcon}" />
-                        </Button>
-                    </StackPanel>
-                </Border>
+               
             </Grid>
         </Grid>
     </Border>

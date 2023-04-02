@@ -4,6 +4,7 @@ namespace CSVEditor.Dialogues
 {
     public class Dialogue : INotifyPropertyChanged
     {
+        public string Index { get; set; } = "1";
         public bool Selected { get; set; } = false;
         public string Question { get; set; }
         public string Answer01 { get; set; }

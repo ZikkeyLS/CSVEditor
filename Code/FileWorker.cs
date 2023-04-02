@@ -13,6 +13,7 @@ namespace CSVEditor
     {
         public bool Linked { get; private set; } = false;
         public bool AllSelected { get; set; } = false;
+        public int MaxPages { get ; private set; }
 
         private FileOrder _order = new FileOrder();
         private DialogueAssembler _dialogueAssembler = new DialogueAssembler();
@@ -23,9 +24,6 @@ namespace CSVEditor
         private TextBlock _dialogueCount;
 
         private string _currentPath = "";
-        private int _pageID = 1;
-
-        private const int limitCellsPerPage = 10;
 
         public void Initialize(Button[] buttons, DataGrid grid, ObservableCollection<Dialogue> data, TextBlock dialogueCount)
         {
@@ -39,10 +37,7 @@ namespace CSVEditor
 
         public void AddRow()
         {
-            if (_dialogues.Count >= limitCellsPerPage)
-                return;
-
-            _dialogues.Add(new Dialogue() { Selected = AllSelected,
+            _dialogues.Add(new Dialogue() { Index = (_dialogues.Count + 1).ToString(), Selected = AllSelected,
                 Question = "...", Answer01 = "...", Answer02 = "...", Answer03 = "...", Answer04 = "..." });
 
             QuickFile.AddLine(_currentPath, "...,...,...,...,...");
@@ -56,7 +51,7 @@ namespace CSVEditor
                 if (_dialogues[i].Selected)
                 {
                     List<string> data = File.ReadAllLines(_currentPath).ToList();
-                    data.RemoveAt(i + 1 + ((_pageID - 1) * limitCellsPerPage));
+                    data.RemoveAt(i + 1);
                     File.WriteAllLines(_currentPath, data);
                 }
 
@@ -85,7 +80,7 @@ namespace CSVEditor
                         };
 
                         string value = _dialogueAssembler.GetCompiledDialogue(temp);
-                        int lineIndex = i + 1 + ((_pageID - 1) * limitCellsPerPage);
+                        int lineIndex = i + 1;
                         QuickFile.RewriteLine(_currentPath, lineIndex, value);
                     }
         }
@@ -124,15 +119,12 @@ namespace CSVEditor
 
             string[] currentData = File.ReadAllLines(path);
 
-            for (int i = 1 + ((_pageID - 1) * limitCellsPerPage); i <= _pageID * limitCellsPerPage; i++)
+            for (int i = 1; i < currentData.Length; i++)
             {
-                if (i + 1 > currentData.Length)
-                    break;
-
                 string[] parts = _dialogueAssembler.GetParsedDialogue(currentData[i]);
 
                 if (parts.Length == 5)
-                    _dialogues.Add(new Dialogue() { Selected = AllSelected, Question = parts[0], Answer01 = parts[1], Answer02 = parts[2], Answer03 = parts[3], Answer04 = parts[4] });
+                    _dialogues.Add(new Dialogue() { Index = (_dialogues.Count + 1).ToString(), Selected = AllSelected, Question = parts[0], Answer01 = parts[1], Answer02 = parts[2], Answer03 = parts[3], Answer04 = parts[4] });
             }
 
             _dialogueCount.Text = $"{_dialogues.Count} dialogues";
